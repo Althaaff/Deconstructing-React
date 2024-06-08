@@ -1,3 +1,7 @@
+import App from './App'
+import { render } from './react-dom';
+import React from './react';
+
 function createElement(type, props, ...children) {
   const reactElement = {
     type,

@@ -1,38 +1,35 @@
-import React from "./react";
+import React, { useState } from "./react";
 import { render } from "./react-dom";
 import "./App.css";
 
-function Card({ title, image, brand, price }) {
+export default function App() {
+  const [count, setCount] = useState(1);  // Pass initial state as 0
+  const [count2, setCount2] = useState(10);
+  const [name, setName] = useState('Muhammad Althaf');
+
   return (
-    <div className="card">
-      <img src={image} alt="iphone" />
-      <div className="card-content">
-        <h3>{title}</h3>
-        <p>{brand}</p>
-        <p>
-          <b>${price}</b>
-        </p>
-      </div>
+    <div className='App'>
+      <h1 style={{ textAlign: 'center', userSelect: 'none', cursor: 'pointer' }} onclick={() => {
+        console.log('clicked')
+        setCount(count + 1)
+      }}>{count}</h1>
+
+     <h1 style={{ textAlign: 'center', userSelect: 'none', cursor: 'pointer' }} onclick={() => {
+        console.log('clicked')
+        setCount2(count2 + 1)
+      }}>{count2}</h1>
+       <h1 style={{ textAlign: 'center' }}>{name}</h1>
+
+       <div style={{ textAlign: 'center'}}>
+         <input 
+           type='text'
+           onchange={(e) => setName(e.target.value)}
+           value={name}
+         />
+       </div>
     </div>
   );
 }
-fetch("https://dummyjson.com/products")
-  .then((res) => res.json())
-  .then((data) => {
-    render(
-      <div className="container">
-        {data.products.map((product) => {
-          return (
-            <Card
-              key={product.id}
-              title={product.title}
-              brand={product.brand}
-              price={product.price}
-              image={product.thumbnail}
-            />
-          );
-        })}
-      </div>,
-      document.getElementById("root")
-    );
-  });
+console.log(App())
+
+render(<App />, document.getElementById('root'))
